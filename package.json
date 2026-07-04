@@ -1,0 +1,24 @@
+{
+  "name": "jogo-dos-pontos",
+  "version": "1.0.0",
+  "description": "Jogo dos Pontos do Eurosport Portugal (Tour de France) - app web para jogar com amigos",
+  "type": "commonjs",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test",
+    "seed:demo": "node scripts/seed-demo.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.49.1"
+  },
+  "license": "MIT"
+}

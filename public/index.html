@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogo dos Pontos · Eurosport · Tour de France 2026</title>
+  <meta name="description" content="Joga com amigos o jogo dos pontos dos comentadores do Eurosport no Tour de France 2026." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9F%A1%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand" id="brandHome" role="button" tabindex="0">
+        <span class="jersey">🟡</span>
+        <div class="brand-text">
+          <strong>Jogo dos Pontos</strong>
+          <small>estilo Eurosport · Tour de France 2026</small>
+        </div>
+      </div>
+      <div class="topbar-right" id="topbarRight"></div>
+    </header>
+
+    <main id="view"></main>
+
+    <footer class="foot">
+      <span>Ganha quem tiver <b>menos</b> pontos · bónus −50 por acertar no vencedor</span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <template id="tpl-home">
+    <section class="home">
+      <div class="hero">
+        <h1>O jogo dos comentadores do Eurosport</h1>
+        <p>Cada etapa, apostas num ciclista. A tua pontuação é a posição em que ele termina.
+          Acertar no vencedor vale <b>−50</b>. No fim, <b>menos pontos = vitória</b>. Joga com os teus amigos.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h2>Criar um jogo</h2>
+          <label>Nome do jogo
+            <input id="newGameName" placeholder="ex: Tour dos malucos" maxlength="60" />
+          </label>
+          <button class="btn primary" id="btnCreate">Criar jogo</button>
+          <p class="hint">Ficas administrador: geres a startlist e os resultados.</p>
+        </div>
+        <div class="card">
+          <h2>Entrar num jogo</h2>
+          <label>Código da sala
+            <input id="joinCode" placeholder="ex: Q9E4Z" maxlength="5" style="text-transform:uppercase" />
+          </label>
+          <label>O teu nome
+            <input id="joinName" placeholder="ex: Ana" maxlength="30" />
+          </label>
+          <button class="btn" id="btnJoin">Entrar</button>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>

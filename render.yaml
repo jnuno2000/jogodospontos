@@ -1,0 +1,20 @@
+# Deploy num clique no Render (https://render.com).
+# Cria um "Blueprint" a partir deste ficheiro. O disco persistente garante que
+# os jogos nao se perdem entre deploys (planos gratuitos podem nao permitir
+# discos — nesse caso usa Postgres/Neon ou aceita que a BD e efemera).
+services:
+  - type: web
+    name: jogo-dos-pontos
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: DATA_DIR
+        value: /app/data
+    disk:
+      name: jogo-data
+      mountPath: /app/data
+      sizeGB: 1
