@@ -44,11 +44,25 @@ npm test            # testes do motor de pontuação
 npm run seed:demo   # cria um jogo de demonstração já pontuado
 ```
 
+## 📱 Publicar grátis pelo telemóvel (Render) — passo a passo
+
+Dá para publicar um link público **usando só o browser do Android/iPhone**, de graça:
+
+1. No browser, vai a **[render.com](https://render.com)** → **Get Started** → **Sign up with GitHub** e autoriza o acesso ao repositório `jogodospontos`.
+2. No painel do Render: **New +** → **Blueprint**.
+3. Escolhe o repositório **`jnuno2000/jogodospontos`**.
+4. Em **Branch**, escolhe **`claude/eurosport-points-game-5v2yuw`** (é o branch que tem o código e o `render.yaml`).
+5. O Render lê o `render.yaml` (plano **Free**, imagem leve). Confirma em **Apply / Create**.
+6. Espera o build terminar (a 1.ª vez pode demorar ~3–5 min). No fim tens um link tipo `https://jogo-dos-pontos.onrender.com`.
+7. Abre esse link, cria o jogo e partilha o **código da sala** (ou o link `?code=...`) com os amigos. 🎉
+
+> **No plano gratuito:** o serviço **adormece** após ~15 min sem uso (a primeira visita a seguir demora ~1 min a acordar), os **dados são efémeros** (podem apagar-se ao adormecer) e o **auto-fetch do PCS está desligado** — introduz os resultados de cada etapa **à mão** no painel de Admin (é rápido: colas a ordem de chegada). Para guardar os dados durante as 3 semanas do Tour, passa a um plano pago com disco (ver secção Docker abaixo) ou liga um Postgres externo.
+
 ## 🌐 Publicar online (jogar à distância)
 
 A app é um único processo Node (serve a API e o frontend), fácil de publicar.
 
-- **Docker** — incluído `Dockerfile` (base Playwright, com Chromium para o auto-fetch):
+- **Docker (com auto-fetch)** — incluído `Dockerfile` (base Playwright, com Chromium):
   ```bash
   docker build -t jogo-dos-pontos .
   docker run -p 3000:3000 -v $(pwd)/data:/app/data jogo-dos-pontos

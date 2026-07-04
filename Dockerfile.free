@@ -1,0 +1,26 @@
+# Imagem LEVE para o plano gratuito do Render (512MB RAM).
+# Nao inclui o Playwright/Chromium: o auto-fetch de resultados fica indisponivel
+# (server/providers/pcs.js devolve NO_PLAYWRIGHT e a UI encaminha para o modo
+# manual, que e o caminho fiavel no plano gratuito).
+FROM node:20-slim
+
+# Dependencias de sistema para compilar o better-sqlite3 caso nao haja binario
+# pre-construido para a plataforma (rede disponivel no build do Render).
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Instalar so dependencias de producao e SEM as opcionais (exclui o Playwright).
+COPY package*.json ./
+RUN npm install --omit=dev --omit=optional
+
+COPY . .
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV DATA_DIR=/app/data
+
+EXPOSE 3000
+CMD ["node", "server/index.js"]

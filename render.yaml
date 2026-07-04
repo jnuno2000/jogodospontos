@@ -1,20 +1,21 @@
-# Deploy num clique no Render (https://render.com).
-# Cria um "Blueprint" a partir deste ficheiro. O disco persistente garante que
-# os jogos nao se perdem entre deploys (planos gratuitos podem nao permitir
-# discos — nesse caso usa Postgres/Neon ou aceita que a BD e efemera).
+# Deploy GRATUITO num clique no Render (https://render.com).
+# Cria um "Blueprint" a partir deste ficheiro (New -> Blueprint -> escolhe o repo
+# e o branch). Usa a imagem leve Dockerfile.free (sem Chromium), ideal para o
+# plano gratuito de 512MB.
+#
+# NOTA sobre persistencia: o plano gratuito NAO tem disco persistente, por isso a
+# base de dados SQLite e EFEMERA (pode perder-se quando o servico adormece ou faz
+# redeploy). Perfeito para experimentar. Para guardar os dados ao longo do Tour,
+# muda para um plano pago com "disk" (ver Dockerfile) ou usa um Postgres externo.
 services:
   - type: web
     name: jogo-dos-pontos
     runtime: docker
-    dockerfilePath: ./Dockerfile
-    plan: starter
+    dockerfilePath: ./Dockerfile.free
+    plan: free
     healthCheckPath: /api/health
     envVars:
       - key: PORT
         value: 3000
       - key: DATA_DIR
         value: /app/data
-    disk:
-      name: jogo-data
-      mountPath: /app/data
-      sizeGB: 1
